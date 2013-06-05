@@ -3,7 +3,7 @@
 #vim: set ts=4 sw=4 et fdm=marker : */
 
 from django.test import TestCase
-from testapp.models import Node, NodeOrderable
+from .models import Node, NodeOrderable
 
 
 class CTTDummyTest(TestCase):

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 #vim: set ts=4 sw=4 et fdm=marker : */
+from __future__ import unicode_literals
 
 """
 Closure Tables Tree models.
@@ -8,9 +9,11 @@ Closure Tables Tree models.
 from django.db import models
 from django.db.models.query_utils import Q
 from ctt.decorators import filtered_qs
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils import six
 from django.utils.translation import ugettext as _
 
-
+@python_2_unicode_compatible
 class CTTModel(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True)
     level = models.IntegerField(default=0, blank=True)
@@ -25,10 +28,10 @@ class CTTModel(models.Model):
     class CTTMeta:
         parent_field = 'parent'
 
-    def __unicode__(self):
+    def __str__(self):
         if hasattr(self, 'name'):
             return self.name
-        return unicode(self.id)
+        return six.text_type(self.id)
 
     def save(self, force_insert=False, force_update=False, using=None):
         is_new = self.pk is None

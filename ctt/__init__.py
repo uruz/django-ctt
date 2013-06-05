@@ -1,1 +1,1 @@
-from core import register
+from .core import register
